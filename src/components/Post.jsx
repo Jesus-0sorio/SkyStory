@@ -22,14 +22,15 @@ export const Post = () => {
 				</button>
 			</div>
 			<div className='flex flex-col'>
-				<div className='h-[23rem]'>
+				<div className='h-[22rem]'>
 					<img
 						src={react}
-						className='h-full w-full'
+						className='h-full p-2 w-full'
 						alt=''
 					/>
 				</div>
-				<div className='border-t pt-1.5 pl-2'>
+        <div className='border-t pt-1.5 pl-2'>
+          <p className='text-md overflow-auto pt-1 pr-[0.4rem]  '>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero deserunt debitis, accusamus molestias animi assumenda ducimus veniam eaque architecto nostrum delectus fugiat maxime, temporibus tempore tenetur numquam voluptates alias? Nisi!</p>
 					<button className='h-full'>
 						<img
 							src={corazon}
