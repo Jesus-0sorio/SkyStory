@@ -1,9 +1,9 @@
 // import {} from 'react-router-dom'
 import { Route, Routes } from 'react-router-dom';
+import { ProtectedRouter } from './components/protected/ProtectedRouter';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
-import {ProtectedRouter} from './components/ProtectedRouter'
 
 function App() {
 	return (
@@ -17,11 +17,20 @@ function App() {
 					path='/signup'
 					element={<SignUp />}
 				/>
-				<Route
-          element={<ProtectedRouter/>}
-        >
-          <Route path='/' element={<Home />} />
-        </Route>
+				<Route element={<ProtectedRouter />}>
+					<Route
+						path='/'
+						element={<Home />}
+					/>
+					<Route
+						path='/create'
+						element={<h1>Create</h1>}
+					/>
+					<Route
+						path='/profile'
+						element={<h1>Profile</h1>}
+					/>
+				</Route>
 			</Routes>
 		</>
 	);
