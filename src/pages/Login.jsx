@@ -1,5 +1,7 @@
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 export const Login = () => {
+	const navigate = useNavigate();
 	return (
 		<div className='h-screen flex justify-center items-center'>
 			<form className='border rounded p-3 h-80 w-96 flex flex-col justify-center items-center gap-3 shadow-xl'>
@@ -26,10 +28,17 @@ export const Login = () => {
 						Password
 					</label>
 					<p className='my-3 text-sm text-center'>
-						¿No tienes cuenta? <Link className='text-blue-600 font-medium hover:text-blue-700 underline underline-offset-1' to="/signup">Registrate aqui</Link>
+						¿No tienes cuenta?{' '}
+						<Link
+							className='text-blue-600 font-medium hover:text-blue-700 underline underline-offset-1'
+							to='/signup'>
+							Registrate aqui
+						</Link>
 					</p>
 				</div>
-				<button className='bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded w-52'>
+				<button
+					onClick={() => navigate('/')}
+					className='bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded w-52'>
 					{' '}
 					Ingresar{' '}
 				</button>
