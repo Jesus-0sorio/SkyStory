@@ -7,9 +7,18 @@ export const login = ({email, password}) => async (dispatch) => {
     const { data } = await api.post('/auth/login', { email, password });
     window.localStorage.setItem('token', data.access_token);
     window.localStorage.setItem('user', JSON.stringify(data.user));
-    dispatch(loginSuccess(data));
-    return true
+    dispatch(loginSuccess(data));    
 	} catch (error) {
 		dispatch(loginFailed(error.message));
 	}
 };
+
+export const logout = () => async (dispatch) => {
+  try {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('user');
+    dispatch(loginSuccess());
+  } catch (error) {
+    dispatch(loginFailed(error.message));
+  }
+}

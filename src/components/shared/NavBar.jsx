@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../../store/slices/auth/thunks';
 
 export const NavBar = () => {
+	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState('hidden');
 	const hanldeMenu = () => {
 		if (showMenu === 'hidden') {
@@ -10,6 +13,11 @@ export const NavBar = () => {
 			setShowMenu('hidden');
 		}
 	};
+
+	const handleLogout = () => {
+		dispatch(logout());
+	};
+
 	return (
 		<nav className='w-screen h-16 border-b'>
 			<div className='flex flex-col  px-2 mx-auto h-full md:items-center md:justify-between md:flex-row '>
@@ -54,11 +62,11 @@ export const NavBar = () => {
 							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'>
 							Perfil
 						</NavLink>
-						<NavLink
-							to='/login'
+						<button
+							onClick={handleLogout}
 							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'>
 							Cerrar sesion
-						</NavLink>
+						</button>
 					</ul>
 				</div>
 			</div>
