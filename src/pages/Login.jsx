@@ -1,13 +1,30 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { login } from '../store/slices/auth/thunks';
 
 export const Login = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const [email, setEmail] = useState('a@a.com');
+	const [password, setPassword] = useState('root');
+
+	const handleSubmit = (e) => {
+		e.preventDefault(); 
+		dispatch(login({ email, password })) && navigate('/');
+	};
+
 	return (
 		<div className='h-screen flex justify-center items-center'>
-			<form className='border rounded p-3 h-80 w-96 flex flex-col justify-center items-center gap-3 shadow-xl'>
+			<form
+				onSubmit={handleSubmit}
+				className='border rounded p-3 h-80 w-96 flex flex-col justify-center items-center gap-3 shadow-xl'>
 				<h1 className='text-3xl font-medium'>Iniciar sesion</h1>
 				<div className='relative z-0 w-64 mb-3'>
 					<input
+						onChange={(e) => setEmail(e.target.value)}
+						value={email}
 						type='email'
 						name='email'
 						className='peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0'
@@ -19,6 +36,8 @@ export const Login = () => {
 				</div>
 				<div className='relative z-0 w-64 '>
 					<input
+						onChange={(e) => setPassword(e.target.value)}
+						value={password}
 						type='password'
 						name='password'
 						className='peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0'
@@ -37,7 +56,7 @@ export const Login = () => {
 					</p>
 				</div>
 				<button
-					onClick={() => navigate('/')}
+					onClick={handleSubmit}
 					className='bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded w-52'>
 					{' '}
 					Ingresar{' '}
