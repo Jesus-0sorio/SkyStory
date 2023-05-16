@@ -1,19 +1,28 @@
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { login } from '../store/slices/auth/thunks';
 
 export const Login = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const { isAuthenticating } = useSelector((state) => state.user);
 
 	const [email, setEmail] = useState('a@a.com');
 	const [password, setPassword] = useState('root');
 
-	const handleSubmit = (e) => {
-		e.preventDefault(); 
-		dispatch(login({ email, password })) && navigate('/');
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			dispatch(login({ email, password }));
+		} catch (error) {
+			console.log(error);
+		}
 	};
+
+	useEffect(() => {
+		isAuthenticating && navigate('/');
+	}, [isAuthenticating, navigate]);
 
 	return (
 		<div className='h-screen flex justify-center items-center'>

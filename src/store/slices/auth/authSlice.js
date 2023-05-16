@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	user: null,
-	token: null,
-	isAuthenticating: false,
+	user: null || JSON.parse(window.localStorage.getItem('user')),
+	token: null || window.localStorage.getItem('token'),
+	isAuthenticating: !window.localStorage.getItem('token') ? false : true,
 	error: null,
 };
 
@@ -12,9 +12,9 @@ export const authSlice = createSlice({
 	initialState,
 	reducers: {
 		loginSuccess: (state, action) => {
-			state.isAuthenticating = false;
-			state.user = action.payload.user;
-			state.token = action.payload.token;
+      state.isAuthenticating = true;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
 		},
 		loginFailed: (state, action) => {
 			state.isAuthenticating = false;
