@@ -22,3 +22,11 @@ export const logout = () => async (dispatch) => {
     dispatch(loginFailed(error.message));
   }
 }
+
+export const register = ({ email, password, name, username }) => async (dispatch) => {
+  try {
+    await api.post('/auth/register', { email, password, name, username });  
+  } catch (error) {
+    dispatch(loginFailed(error.message));
+  }
+}
