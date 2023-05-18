@@ -8,7 +8,7 @@ export const Login = () => {
 	const dispatch = useDispatch();
 	const { isAuthenticating } = useSelector((state) => state.user);
 
-	const [email, setEmail] = useState('a@a.com');
+	const [email, setEmail] = useState('artur@gmail.com');
 	const [password, setPassword] = useState('root');
 
 	const handleSubmit = async (e) => {
