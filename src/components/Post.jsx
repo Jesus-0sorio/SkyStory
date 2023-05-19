@@ -21,7 +21,7 @@ export const Post = (post) => {
 				</button>
 			</div>
 			<div className='flex flex-col'>
-				<div className='h-[22rem] md:h-[44rem]'>
+				<div className='h-[22rem] md:h-[44rem] lg:h-[35rem]'>
 					<img
 						src={`${import.meta.env.VITE_BASE_URL}${fileUrl}`}
 						className='h-full w-full'
