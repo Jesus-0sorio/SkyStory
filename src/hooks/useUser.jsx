@@ -6,7 +6,6 @@ export const useUser = () => {
 	const {
 		user: { userID },
 	} = useSelector((state) => state.user);
-	console.log(userID);
 	const [edit, setEdit] = useState(false);
 	const [img, setImg] = useState(null);
 	const [{ name, email, username, file }, setUser] = useState({});
