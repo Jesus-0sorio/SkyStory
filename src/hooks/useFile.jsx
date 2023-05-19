@@ -40,6 +40,7 @@ export const useFile = () => {
 		formData.append('file', file);
 		formData.append('description', description);
 		postServices.create(formData);
+		window.location.reload();
 	};
 
 	const updatePost = (id, file) => {
@@ -55,6 +56,7 @@ export const useFile = () => {
 
 	const deletePost = (id) => {
 		postServices.delete(id);
+		window.location.reload();
 	};
 
 	return {
