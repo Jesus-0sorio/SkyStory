@@ -35,10 +35,10 @@ export const NavBar = ({ handleToogle }) => {
 
 	return (
 		<nav className='w-screen h-16 border-b'>
-			<div className='flex flex-col px-2 mx-auto h-full md:items-center md:justify-between md:flex-row '>
-				<div
-					ref={wrapperRef}
-					className='p-3 md:p-4 flex flex-row items-center justify-between'>
+			<div
+				ref={wrapperRef}
+				className='flex flex-col px-2 mx-auto h-full md:items-center md:justify-between md:flex-row '>
+				<div className='p-3 md:p-4 flex flex-row items-center justify-between'>
 					<NavLink
 						to='/'
 						className='text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg focus:outline-none focus:shadow-outline'>
@@ -66,7 +66,9 @@ export const NavBar = ({ handleToogle }) => {
 					<ul className='flex w-full flex-col items-center p-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium md:border-0 md:bg-white'>
 						<NavLink
 							to='/'
-							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'>
+							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'
+							onClick={() => setShowMenu('hidden')}
+						>
 							Inicio
 						</NavLink>
 						<button
@@ -75,6 +77,7 @@ export const NavBar = ({ handleToogle }) => {
 							Crear
 						</button>
 						<NavLink
+							onClick={() => setShowMenu('hidden')}
 							to='/profile'
 							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'>
 							Perfil
