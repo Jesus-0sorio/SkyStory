@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { userServices } from '../services/userServices';
+import Swal from 'sweetalert2';
 
 export const useUser = () => {
 	const {
@@ -17,13 +18,18 @@ export const useUser = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		const user = {
 			name: e.target.elements.Nombre.value,
 			email: e.target.elements.Email.value,
 			username: e.target.elements.Username.value,
 			file: img,
 		};
+
+		if (!user.name || !user.email || !user.username) return Swal.fire('Error', 'Ningun campo puede estar vacio', 'error');
+
 		await userServices.update(userID, user);
+		window.location.reload();
 	};
 
 	const handleGetFile = (file) => {

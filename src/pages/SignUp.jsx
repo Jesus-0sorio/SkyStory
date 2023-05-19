@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { register } from '../store/slices/auth/thunks';
 
 export const SignUp = () => {
@@ -13,9 +14,17 @@ export const SignUp = () => {
 		password: '',
 	});
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(register(user));
+		if (!user.name || !user.username || !user.email || !user.password)
+			return Swal.fire('Error', 'Todos los campos son obligatorios', 'error');
+
+		const res = await dispatch(register(user));
+
+		if (res) {
+			return Swal.fire('Error', res, 'error');
+		}
+
 		navigate('/login');
 	};
 

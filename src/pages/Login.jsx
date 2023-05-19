@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { login } from '../store/slices/auth/thunks';
 
 export const Login = () => {
@@ -8,11 +9,13 @@ export const Login = () => {
 	const dispatch = useDispatch();
 	const { isAuthenticating } = useSelector((state) => state.user);
 
-	const [email, setEmail] = useState('artur@gmail.com');
+	const [email, setEmail] = useState('chi@gmail.com');
 	const [password, setPassword] = useState('root');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (!email || !password)
+			return Swal.fire('Error', 'Todos los campos son obligatorios', 'error');
 		try {
 			dispatch(login({ email, password }));
 		} catch (error) {
@@ -64,9 +67,7 @@ export const Login = () => {
 						</Link>
 					</p>
 				</div>
-				<button
-					onClick={handleSubmit}
-					className='bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded w-52'>
+				<button className='bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded w-52'>
 					{' '}
 					Ingresar{' '}
 				</button>

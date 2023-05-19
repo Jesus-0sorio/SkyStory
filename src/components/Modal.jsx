@@ -3,13 +3,19 @@ import { Fragment, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useFile } from '../hooks/useFile';
 import Dropzone from './Dropzone';
+import Swal from 'sweetalert2';
 
 export const Modal = ({ isActive, handleToogle }) => {
 	const cancelButtonRef = useRef(null);
 
-	const { file, getFile, getDescription, addPost } = useFile();
+	const { file, description, getFile, getDescription, addPost } = useFile();
 
 	const handleaddPost = () => {
+		if (file == null || description == '') return Swal.fire(
+			'Error',
+			'Por favor, ingrese una imagen y una descripción',
+			'error'
+		);
 		addPost();
 		toogle();
 	};

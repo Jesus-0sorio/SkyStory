@@ -26,7 +26,7 @@ const Profile = () => {
 				<form
 					onSubmit={handleSubmit}
 					className=' relative h-[34rem] flex flex-col mx-auto justify-center border rounded-lg shadow-md border-gray-600 pl-4 sm:w-[30rem] md:w-[32rem]'>
-					<button onClick={handleEdit}>
+					<button type='button' onClick={handleEdit}>
 						<img
 							src={editImg}
 							className='absolute top-2 right-2 w-7'
@@ -39,7 +39,11 @@ const Profile = () => {
 								src={
 									file ? `${import.meta.env.VITE_BASE_URL}${file}` : profileImg
 								}
-								className={file ? 'h-56 w-56 mx-auto rounded-full mb-5' : 'w-44 mb-10 mx-auto'}
+								className={
+									file
+										? 'h-56 w-56 mx-auto rounded-full mb-5'
+										: 'w-44 mb-10 mx-auto'
+								}
 							/>
 						) : (
 							<div
