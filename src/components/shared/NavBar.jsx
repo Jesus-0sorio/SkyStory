@@ -34,10 +34,10 @@ export const NavBar = ({ handleToogle }) => {
 	};
 
 	return (
-		<nav className='w-screen h-16 border-b'>
+		<nav className='h-16 border-b'>
 			<div
 				ref={wrapperRef}
-				className='flex flex-col px-2 mx-auto h-full md:items-center md:justify-between md:flex-row '>
+				className='flex flex-col px-2 mx-auto h-full md:items-center md:justify-between md:flex-row'>
 				<div className='p-3 md:p-4 flex flex-row items-center justify-between'>
 					<NavLink
 						to='/'

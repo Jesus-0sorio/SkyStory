@@ -49,6 +49,7 @@ export const useFile = () => {
 
 	const deletePost = (id) => {
 		postServices.delete(id);
+		window.location.reload();
 	};
 
 	return {
