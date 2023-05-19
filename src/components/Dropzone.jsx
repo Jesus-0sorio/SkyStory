@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useDropzone } from 'react-dropzone';
 
-const Dropzone = ({ file, handleGetFile }) => {
+const Dropzone = ({ file, handleGetFile, imgClass }) => {
 	const { getRootProps, getInputProps } = useDropzone({
 		accept: 'image/*',
 		onDrop: (acceptedFiles) => {
@@ -19,7 +19,7 @@ const Dropzone = ({ file, handleGetFile }) => {
 		<img
 			key={file.name}
 			src={file.preview}
-			className='w-full h-full object-cover'
+			className={!imgClass ? 'w-44 mx-auto' : imgClass}
 			// Revoca el objeto URL después de cargar la imagen
 			onLoad={() => {
 				URL.revokeObjectURL(file.preview);

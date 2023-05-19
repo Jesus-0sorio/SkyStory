@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../../store/slices/auth/thunks';
@@ -7,10 +7,24 @@ import { logout } from '../../store/slices/auth/thunks';
 export const NavBar = ({ handleToogle }) => {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState('hidden');
+	const wrapperRef = useRef(null);
 	const hanldeMenu = () => {
 		if (showMenu === 'hidden') {
 			setShowMenu('block');
 		} else {
+			setShowMenu('hidden');
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
+
+	const handleClickOutside = (event) => {
+		if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
 			setShowMenu('hidden');
 		}
 	};
@@ -22,7 +36,9 @@ export const NavBar = ({ handleToogle }) => {
 	return (
 		<nav className='w-screen h-16 border-b'>
 			<div className='flex flex-col px-2 mx-auto h-full md:items-center md:justify-between md:flex-row '>
-				<div className='p-3 md:p-4 flex flex-row items-center justify-between'>
+				<div
+					ref={wrapperRef}
+					className='p-3 md:p-4 flex flex-row items-center justify-between'>
 					<NavLink
 						to='/'
 						className='text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg focus:outline-none focus:shadow-outline'>
