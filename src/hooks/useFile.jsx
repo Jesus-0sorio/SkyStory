@@ -35,27 +35,27 @@ export const useFile = () => {
 		postServices.getAll();
 	};
 
-	const addPost = () => {
+	const addPost = async () => {
 		const formData = new FormData();
 		formData.append('file', file);
 		formData.append('description', description);
-		postServices.create(formData);
+		await postServices.create(formData);
 		window.location.reload();
 	};
 
-	const updatePost = (id, file) => {
+	const updatePost = async (id, file) => {
 		if (file.like == true) {
-			postServices.update(id, file);
+			await postServices.update(id, file);
 		} else {
-			postServices.update(id, {
+			await postServices.update(id, {
 				like: true,
 				...file,
 			});
 		}
 	};
 
-	const deletePost = (id) => {
-		postServices.delete(id);
+	const deletePost = async (id) => {
+		await postServices.delete(id);
 		window.location.reload();
 	};
 
