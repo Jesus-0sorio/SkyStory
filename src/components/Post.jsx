@@ -6,12 +6,12 @@ import puntos from '../assets/three_dots_icon_159804.svg';
 import { useFile } from '../hooks/useFile';
 
 export const Post = (post) => {
-	const [showMenu, setShowMenu] = useState('hidden');
-	const [like, setLike] = useState(false);
-
 	const {
 		user: { userID },
 	} = useSelector((state) => state.user);
+
+	const [showMenu, setShowMenu] = useState('hidden');
+	const [like, setLike] = useState(post.post.likes.includes(userID) || false);
 
 	const { updatePost, deletePost } = useFile();
 
@@ -24,7 +24,7 @@ export const Post = (post) => {
 
 	const handleLike = () => {
 		setLike(!like);
-		updatePost(postID, { like: !like });
+		updatePost(postID, { like: like });
 	};
 
 	return (
@@ -59,7 +59,7 @@ export const Post = (post) => {
 				</ul>
 			</div>
 			<div className='flex flex-col'>
-				<div className='h-[22rem] md:h-[44rem] lg:h-[35rem]'>
+				<div className='h-[22rem] md:h-[28rem] lg:h-[35rem]'>
 					<img
 						src={`${import.meta.env.VITE_BASE_URL}${fileUrl}`}
 						className='h-full w-full'
@@ -70,14 +70,17 @@ export const Post = (post) => {
 					<p className='text-md overflow-auto pt-1 pr-[0.4rem]  '>
 						{description}
 					</p>
-					<button
-						onClick={handleLike}
-						className='h-full my-2'>
-						<img
-							src={like ? heartRed : heart}
-							className='h-6'
-						/>
-					</button>
+					<div className=''>
+						<button
+							onClick={handleLike}
+							className='h-full mt-2'>
+							<img
+								src={like ? heartRed : heart}
+								className='h-5 '
+							/>
+						</button>
+						<p className='font-bold pl-1 mt-0 mb-4'>{post.post.likes.length} Me gustas</p>
+					</div>
 				</div>
 			</div>
 		</div>

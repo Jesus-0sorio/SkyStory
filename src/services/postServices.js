@@ -1,4 +1,4 @@
-import { apiFile } from '../config/axios';
+import { apiFile, api } from '../config/axios';
 
 const BASE_URL = 'post';
 
@@ -16,7 +16,7 @@ export const postServices = {
 	},
 
 	update: async (id, data) => {
-		return await apiFile.patch(`/${BASE_URL}/${id}`, data);
+		return await api.patch(`/${BASE_URL}/${id}`, data);
 	},
 
 	delete: async (id) => {

@@ -44,7 +44,14 @@ export const useFile = () => {
 	};
 
 	const updatePost = (id, file) => {
-		postServices.update(id, file);
+		if (file.like == true) {
+			postServices.update(id, file);
+		} else {
+			postServices.update(id, {
+				like: true,
+				...file,
+			});
+		}
 	};
 
 	const deletePost = (id) => {
