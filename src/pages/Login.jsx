@@ -9,8 +9,8 @@ export const Login = () => {
 	const dispatch = useDispatch();
 	const { isAuthenticating } = useSelector((state) => state.user);
 
-	const [email, setEmail] = useState('chi@gmail.com');
-	const [password, setPassword] = useState('root');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

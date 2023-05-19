@@ -31,7 +31,7 @@ export const logout = () => async (dispatch) => {
 		window.localStorage.removeItem('user');
 		dispatch(loginSuccess());
 	} catch (error) {
-		dispatch(loginFailed(error.response.data.message));
+		dispatch(loginFailed(error.response?.data.message));
 	}
 };
 

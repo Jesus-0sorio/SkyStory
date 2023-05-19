@@ -31,6 +31,7 @@ export const NavBar = ({ handleToogle }) => {
 
 	const handleLogout = () => {
 		dispatch(logout());
+		window.location.reload();
 	};
 
 	return (
