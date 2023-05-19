@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../../store/slices/auth/thunks';
 
-export const NavBar = () => {
+// eslint-disable-next-line react/prop-types
+export const NavBar = ({ handleToogle }) => {
+	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState('hidden');
+	const wrapperRef = useRef(null);
 	const hanldeMenu = () => {
 		if (showMenu === 'hidden') {
 			setShowMenu('block');
@@ -10,10 +15,30 @@ export const NavBar = () => {
 			setShowMenu('hidden');
 		}
 	};
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
+
+	const handleClickOutside = (event) => {
+		if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+			setShowMenu('hidden');
+		}
+	};
+
+	const handleLogout = () => {
+		dispatch(logout());
+	};
+
 	return (
-		<nav className='w-screen h-16 border-b'>
-			<div className='flex flex-col  px-2 mx-auto h-full md:items-center md:justify-between md:flex-row '>
-				<div className='p-4 flex flex-row items-center justify-between'>
+		<nav className='h-16 border-b'>
+			<div
+				ref={wrapperRef}
+				className='flex flex-col px-2 mx-auto h-full md:items-center md:justify-between md:flex-row'>
+				<div className='p-3 md:p-4 flex flex-row items-center justify-between'>
 					<NavLink
 						to='/'
 						className='text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg focus:outline-none focus:shadow-outline'>
@@ -38,27 +63,30 @@ export const NavBar = () => {
 					</button>
 				</div>
 				<div className={`${showMenu} z-10 w-full md:block md:w-auto`}>
-					<ul className='flex w-full flex-col p-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium md:border-0 md:bg-white'>
+					<ul className='flex w-full flex-col items-center p-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium md:border-0 md:bg-white'>
 						<NavLink
 							to='/'
-							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'>
+							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'
+							onClick={() => setShowMenu('hidden')}
+						>
 							Inicio
 						</NavLink>
-						<NavLink
-							to='/create'
+						<button
+							onClick={handleToogle}
 							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'>
 							Crear
-						</NavLink>
+						</button>
 						<NavLink
+							onClick={() => setShowMenu('hidden')}
 							to='/profile'
 							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'>
 							Perfil
 						</NavLink>
-						<NavLink
-							to='/login'
+						<button
+							onClick={handleLogout}
 							className='block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent md:hover:text-blue-700 md:p-0'>
 							Cerrar sesion
-						</NavLink>
+						</button>
 					</ul>
 				</div>
 			</div>
