@@ -7,13 +7,17 @@ import Dropzone from './Dropzone';
 export const Modal = ({ isActive, handleToogle }) => {
 	const cancelButtonRef = useRef(null);
 
-	const { file, getFile, getDescription, addFile } = useFile();
+	const { file, getFile, getDescription, addPost } = useFile();
 
-  const handleAddFile = () => {
-    addFile();
-    getFile([]);
-    getDescription('');
-    handleToogle();
+	const handleaddPost = () => {
+		addPost();
+		toogle();
+	};
+
+	const toogle = () => {
+		getFile([]);
+		getDescription('');
+		handleToogle();
 	};
 
 	return createPortal(
@@ -24,7 +28,7 @@ export const Modal = ({ isActive, handleToogle }) => {
 				as='div'
 				className='relative z-10 '
 				initialFocus={cancelButtonRef}
-				onClose={handleToogle}>
+				onClose={toogle}>
 				<Transition.Child
 					as={Fragment}
 					enter='ease-out duration-300'
@@ -56,7 +60,7 @@ export const Modal = ({ isActive, handleToogle }) => {
 												Crear publicación
 											</Dialog.Title>
 											<button
-												onClick={handleAddFile}
+												onClick={handleaddPost}
 												className='text-right text-blue-600 hover:text-blue-800'>
 												Compartir
 											</button>
@@ -70,8 +74,8 @@ export const Modal = ({ isActive, handleToogle }) => {
 											/>
 										</div>
 										<div className='bg-gray-50  min-h-fit'>
-                      <textarea
-                        onChange={(e) => getDescription(e.target.value)}  
+											<textarea
+												onChange={(e) => getDescription(e.target.value)}
 												className='w-full h-[4.6rem] md:h-full p-2 outline-none resize-none'
 												placeholder='Escribe una descripción'
 											/>

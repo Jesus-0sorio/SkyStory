@@ -23,10 +23,6 @@ function App() {
 						element={<Home />}
 					/>
 					<Route
-						path='/create'
-						element={<h1>Create</h1>}
-					/>
-					<Route
 						path='/profile'
 						element={<h1>Profile</h1>}
 					/>
